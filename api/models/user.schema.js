@@ -16,10 +16,10 @@ var userschema = new mongoose.Schema({
         type: String
     },
     cart: {
-        type: [String]
+        type: [Object]
     },
     wishlist: {
-        type: [String]
+        type: [Object]
     }
 });
 

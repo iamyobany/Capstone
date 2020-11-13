@@ -3,7 +3,6 @@ var express = require('express');
 var cors = require('cors');
 require('./dbconnection')();
 const userRoutes = require('./routes/user.route');
-const authRoutes = require('./routes/auth.route');
 const productRoutes = require('./routes/product.route')
 var app = express();
 
@@ -12,7 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/api', userRoutes);
-app.use('/api', authRoutes);
 app.use('/api', productRoutes);
 
 // Local port.

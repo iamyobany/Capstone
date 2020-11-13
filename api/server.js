@@ -1,7 +1,7 @@
 // Use Express
 var express = require('express');
 var cors = require('cors');
-require('./db/dbconnection')();
+require('./dbconnection')();
 const userRoutes = require('./routes/user.route');
 const authRoutes = require('./routes/auth.route');
 const productRoutes = require('./routes/product.route')

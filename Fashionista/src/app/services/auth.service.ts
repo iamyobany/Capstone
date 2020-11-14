@@ -7,57 +7,37 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AuthService {
 
-  get user(): any {
-    // tslint:disable-next-line:variable-name
-    const _id = this.getWithExpiry(this.KEY);
-    const type = this.getWithExpiry(this.TYPE_KEY);
-    const name = this.getWithExpiry(this.NAME_KEY);
-    return (_id && type && name) ? {_id, name, type} : {};
-    if (this.loggedInStatus && this.getWithExpiry(this.KEY)) {
-      return this.currentUser;
-    } else {
-      this.logout();
-      return this.currentUser;
-    }
+  constructor(private httpClient: HttpClient) {
   }
 
-  // get cart(): Array<any> {
-  //   if (this.loggedInStatus && this.getWithExpiry(this.KEY)) {
-  //     // @ts-ignore
-  //     return this.currentUser.cart;
-  //   } else {
-  //     this.logout();
-  //     return [];
-  //   }
-  // }
+  private KEY = 'fashionista-auth';
+  private TYPE_KEY = 'fashionista-auth-type';
+  private EMAIL_KEY = 'fashionista-auth-email';
+  private FIRSTNAME_KEY = 'fashionista-auth-firstName';
+  private LASTNAME_KEY = 'fashionista-auth-lastName';
 
-  // get wishlist(): Array<any> {
-  //   if (this.loggedInStatus && this.getWithExpiry(this.KEY)) {
-  //     // @ts-ignore
-  //     return this.currentUser.wishlist;
-  //   } else {
-  //     this.logout();
-  //     return [];
-  //   }
-  // }
+  private TTL = 1000 * 60 * 10;
+  private authApi = '/api/login';
+
+  private currentUser = {};
+  private loggedInStatus = false;
+
+  get user(): any {
+    // tslint:disable-next-line:variable-email
+    const _id = this.getWithExpiry(this.KEY);
+    const type = this.getWithExpiry(this.TYPE_KEY);
+    const email = this.getWithExpiry(this.EMAIL_KEY);
+    const firstName = this.getWithExpiry(this.FIRSTNAME_KEY);
+    const lastName = this.getWithExpiry(this.LASTNAME_KEY);
+
+    return (_id && type && email && firstName && lastName) ? {_id, firstName, lastName, email, type} : {};
+  }
 
   get loggedIn(): boolean {
     return !!this.getWithExpiry(this.KEY);
     this.loggedInStatus = this.loggedInStatus && !!this.getWithExpiry(this.KEY);
     return this.loggedInStatus;
   }
-
-  constructor(private httpClient: HttpClient) {
-  }
-
-  private KEY = 'fashionista-auth';
-  private TYPE_KEY = 'fashionista-auth-type';
-  private NAME_KEY = 'fashionista-auth-name';
-  private TTL = 1000 * 60 * 10;
-  private authApi = '/api/auth';
-
-  private currentUser = {};
-  private loggedInStatus = false;
 
   // Error handling
   private static error(error: any): void {
@@ -89,21 +69,21 @@ export class AuthService {
   }
 
   login(user): Promise<boolean> {
-    const {name, password} = user;
+    const {email, password} = user;
     // console.log('authenticating login...');
     return new Promise<boolean>((resolve, reject) => {
       setTimeout(() => reject('No response.'), 10000);
-      if (name && password) {
-        resolve(this.authUser({name, password}));
+      if (email && password) {
+        resolve(this.authUser({email, password}));
       } else {
         resolve(false);
       }
     });
 
     // // console.log(user);
-    // const { _id, name, type } = user;
-    // if (_id && name && type) {
-    //   this.currentUser = { _id, name, type };
+    // const { _id, email, type } = user;
+    // if (_id && email && type) {
+    //   this.currentUser = { _id, email, type };
     //   // @ts-ignore
     //   // if (!this.currentUser.cart) { this.currentUser.cart = []; }
     //   // @ts-ignore
@@ -115,21 +95,25 @@ export class AuthService {
   }
 
   authUser(user): Promise<boolean> {
-    const {name, password} = user;
+    const {email, password} = user;
     // @ts-ignore
-    return this.httpClient.post(this.authApi, {name, password}).toPromise().then(({_id, type, error}) => {
+    return this.httpClient.post(this.authApi, {email, password}).toPromise().then(({_id, firstName, lastName, type, error}) => {
       if (error) {
         console.log(error);
         return false;
       } else {
         // console.log('saving user');
-        this.currentUser = {_id, name: user.name, type};
+        this.currentUser = {_id, email: user.email, firstName, lastName, type};
         AuthService.remove(this.KEY);
         AuthService.setWithExpiry(this.KEY, _id, this.TTL);
         AuthService.remove(this.TYPE_KEY);
         AuthService.setWithExpiry(this.TYPE_KEY, type, this.TTL);
-        AuthService.remove(this.NAME_KEY);
-        AuthService.setWithExpiry(this.NAME_KEY, name, this.TTL);
+        AuthService.remove(this.EMAIL_KEY);
+        AuthService.setWithExpiry(this.EMAIL_KEY, email, this.TTL);
+        AuthService.remove(this.FIRSTNAME_KEY);
+        AuthService.setWithExpiry(this.FIRSTNAME_KEY, firstName, this.TTL);
+        AuthService.remove(this.LASTNAME_KEY);
+        AuthService.setWithExpiry(this.LASTNAME_KEY, lastName, this.TTL);
         return true;
       }
     }).catch(AuthService.error);
@@ -138,7 +122,9 @@ export class AuthService {
   logout(): void {
     AuthService.remove(this.KEY);
     AuthService.remove(this.TYPE_KEY);
-    AuthService.remove(this.NAME_KEY);
+    AuthService.remove(this.EMAIL_KEY);
+    AuthService.remove(this.FIRSTNAME_KEY);
+    AuthService.remove(this.LASTNAME_KEY);
     this.currentUser = {};
     this.loggedInStatus = false;
   }

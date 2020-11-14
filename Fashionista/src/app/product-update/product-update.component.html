@@ -1,0 +1,21 @@
+<app-header-bar [parent]="title"></app-header-bar>
+<div class="text-center body-div" style="">
+    <form [formGroup]="form" class="form-signin" (ngSubmit)="submitUpdateForm()">
+      <h3 class="mb-3 font-weight-normal">Edit Product</h3>
+  
+      <label for="inputProductName" class="sr-only">New Product Name</label>
+      <input type="text" class="form-control" id="inputProductName" [formControlName]="'name'" placeholder="Product Name" autofocus autocomplete="on"/><br/>
+      
+      <label for="inputProductBrand" class="sr-only">New Product Brand</label>
+      <input type="text" class="form-control" id="inputProductBrand" [formControlName]="'brand'" placeholder="Product Brand" autocomplete="on"/><br/>
+  
+      <label for="inputProductPrice" class="sr-only">New Product Price</label>
+      <input type="text" class="form-control" id="inputProductPrice" [formControlName]="'price'" placeholder="Product Price" autocomplete="on"/><br/>
+  
+      <label for="inputProductQuantity" class="sr-only">New Product Price</label>
+      <input type="text" class="form-control" id="inputProductQuantity" [formControlName]="'quantity'" placeholder="Product Quantity" autocomplete="on"/><br/>
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="form.invalid">Update Product</button>
+      <br>
+    </form>
+  </div>

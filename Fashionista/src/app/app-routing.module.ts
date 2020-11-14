@@ -7,6 +7,7 @@ import {AdminPortalComponent} from './admin-portal/admin-portal.component';
 import {AdminGuard} from './guards/admin.guard';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import { ProductUpdateComponent } from './product-update/product-update.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'admin', component: AdminPortalComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'createProduct', component:ProductCreateComponent, canActivate:[AuthGuard, AdminGuard]}
+  {path: 'createProduct', component:ProductCreateComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'updateProduct/:id', component:ProductUpdateComponent, canActivate:[AuthGuard, AdminGuard]}
 ];
 
 @NgModule({

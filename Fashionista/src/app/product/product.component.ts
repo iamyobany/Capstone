@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ProductService} from '../services/product/product.service';
 import {AuthService} from '../services/auth.service';
 import {UserService} from '../services/user/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -14,7 +15,7 @@ export class ProductComponent implements OnInit {
   @Input() productName;
   @Input() productBrand;
   @Input() cartCount;
-  @Input() displayType = ''; // display 'all', 'cart', or 'wishlist'
+  @Input() displayType = ''; 
   @Input() userType = '';
   @Input() parent = '';
 
@@ -23,7 +24,7 @@ export class ProductComponent implements OnInit {
     user: ['user-portal'],
   };
 
-  constructor(private auth: AuthService, private ps: ProductService, private us: UserService) { }
+  constructor(private auth: AuthService, private ps: ProductService, private us: UserService, private router: Router) { }
 
   ngOnInit(): void {
     if (this.productId && (!this.productName || !this.productBrand)) {
@@ -83,8 +84,7 @@ export class ProductComponent implements OnInit {
   }
 
   editProduct(): boolean | void {
-    // TODO: edit product server request and ui
-    this.unimplemented(false);
+    this.router.navigate([`/updateProduct/${this.productId}`])
   }
 
   deleteProduct(): boolean | void {

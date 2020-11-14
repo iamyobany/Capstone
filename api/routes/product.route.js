@@ -33,11 +33,11 @@ router.put('/products/:id', async(req, res) => {
     products.price = req.body.price;
     products.quantity = req.body.quantity;
 
-    const product = await Product.findOneAndUpdate({_id: new ObjectId(id)}, {$set: product}, {new:true})
+    const product = await Product.findOneAndUpdate({_id: new ObjectId(id)}, {$set: products}, {new:true})
     res.json(product)
 })
 
-router.delete('/products', async (req, res) => {
+router.delete('/products/:id', async (req, res) => {
     const id = req.params.id
     const product = await Product.deleteOne({_id: new ObjectId(id)})
     res.status(200).json(product)

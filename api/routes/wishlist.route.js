@@ -8,16 +8,16 @@ router.post('/wishlist/:userid/:productid', async (req, res) => {
     const userid = req.params.userid
     const productid = req.params.productid
 
-    const user = await User.findOneAndUpdate({_id: new ObjectId(userid)}, {$push: {"cart": {_id:productid, count: 1}}}, {new:true})
+    const user = await User.findOneAndUpdate({_id: new ObjectId(userid)}, {$push: {"wishlist": {_id:productid, count: 1}}}, {new:true})
 
     res.status(200).json(user.wishlist)
 })
 
-router.post('/wishlist/:userid/:productid', async (req, res) => {
+router.delete('/wishlist/:userid/:productid', async (req, res) => {
     const userid = req.params.userid
     const productid = req.params.productid
 
-    const user = await User.findOneAndUpdate({_id: new ObjectId(userid)}, {$pull: {"cart": {_id:productid, count: 1}}}, {new:true})
+    const user = await User.findOneAndUpdate({_id: new ObjectId(userid)}, {$pull: {"wishlist": {_id:productid, count: 1}}}, {new:true})
 
     res.status(200).json(user.wishlist)
 })

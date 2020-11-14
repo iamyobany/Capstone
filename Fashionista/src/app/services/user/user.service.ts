@@ -9,7 +9,7 @@ export class UserService {
 
   private usersApi = 'http://localhost:8080/api/users';
   private cartsApi = 'http://localhost:8080/api/carts';
-  private wishlistsApi = 'http://localhost:8080/api/wishlists';
+  private wishlistsApi = 'http://localhost:8080/api/wishlist';
 
   user;
   users;

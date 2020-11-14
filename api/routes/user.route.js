@@ -20,7 +20,7 @@ router.post('/users', async (req, res)=>{
 })
 
 //get one user
-router.get('/users/:"id', async(req, res) => {
+router.get('/users/:id', async(req, res) => {
     const id = req.params.id
     const user = await User.findOne({_id: new ObjectId(id)})
     res.status(200).json(user)

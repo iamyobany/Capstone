@@ -12,7 +12,7 @@ router.post('/carts/:userid/:productid', async (req, res) => {
     res.status(200).json(user.cart)
 })
 
-router.post('/carts/:userid/:productid', async (req, res) => {
+router.delete('/carts/:userid/:productid', async (req, res) => {
     const userid = req.params.userid
     const productid = req.params.productid
     const user = await User.findOneAndUpdate({_id: new ObjectId(userid)}, {$pull: {"cart": {_id:productid, count: 1}}}, {new:true})

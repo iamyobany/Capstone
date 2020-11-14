@@ -17,7 +17,7 @@ router.post('/products', async (req, res)=>{
 })
 
 //get one product
-router.get('/products/:"id', async(req, res) => {
+router.get('/products/:id', async(req, res) => {
     const id = req.params.id
     const product = await Product.findOne({_id: new ObjectId(id)})
     res.status(200).json(product)

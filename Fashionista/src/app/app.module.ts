@@ -14,6 +14,7 @@ import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RegisterComponent } from './register/register.component';
     HeaderBarComponent,
     UserListComponent,
     UserComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductCreateComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { ProductCreateComponent } from './product-create/product-create.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {UserPortalComponent} from './user-portal/user-portal.component';
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'user', component: UserPortalComponent, canActivate: [AuthGuard] },
   {path: 'admin', component: AdminPortalComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'createProduct', component:ProductCreateComponent, canActivate:[AuthGuard, AdminGuard]}
 ];
 
 @NgModule({

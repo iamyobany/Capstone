@@ -49,8 +49,7 @@ export class UserService {
       this.user.next({});
       return new Promise<any>(((resolve, reject) => (resolve({}))));
     }
-    const nextUser = {};
-    // tslint:disable-next-line:variable-name
+
     return this.httpClient.get(`${this.usersApi}/${id}`).toPromise().then(_user => {
       this.user.next(_user);
       console.log(_user);

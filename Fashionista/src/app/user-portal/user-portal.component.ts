@@ -13,6 +13,7 @@ export class UserPortalComponent implements OnInit {
 
   title = 'user-portal';
 
+  user = {_id: '', name: '', type: ''}
   userType = '';
   productList = [];
   cartList = [];
@@ -20,8 +21,9 @@ export class UserPortalComponent implements OnInit {
 
 
   constructor(private auth: AuthService, private ps: ProductService, private us: UserService, private router: Router) {
-    this.us.user.subscribe(user => {
-      this.userType = user.type;
+    this.us.user.subscribe(_user => {
+      this.user = _user
+      this.userType = _user.type;
     });
 
     this.ps.products.subscribe(products => this.productList = products);

@@ -38,7 +38,7 @@ router.put('/users/:id', async(req, res) => {
         }
     }
 
-    const user = await User.findOneAndUpdate({_id: new ObjectId(id)}, {$set: user}, {new:true})
+    const user = await User.findOneAndUpdate({_id: new ObjectId(id)}, {$set: users}, {new:true})
     res.json(user)
 })
 

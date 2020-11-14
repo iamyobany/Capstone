@@ -42,7 +42,7 @@ router.put('/users/:id', async(req, res) => {
     res.json(user)
 })
 
-router.delete('/users', async (req, res) => {
+router.delete('/users/:id', async (req, res) => {
     const id = req.params.id
     const user = await User.deleteOne({_id: new ObjectId(id)})
     res.status(200).json(user)

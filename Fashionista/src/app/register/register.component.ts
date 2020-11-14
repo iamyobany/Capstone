@@ -2,19 +2,25 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
-import {UsersService} from '../services/users.service';
+import {UserService} from '../services/user/users.service';
 
 @Component({
-  selector: 'app-register-user',
-  templateUrl: './register-user.component.html',
-  styleUrls: ['./register-user.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class RegisterUserComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
+  form: FormGroup;
+  failedRegistration;
+  userType;
+  loggedInUserType;
   title = 'register-user';
 
-  constructor(private readonly fb: FormBuilder, private auth: AuthService, private router: Router, private us: UsersService) {
+  constructor(private readonly fb: FormBuilder, private auth: AuthService, private router: Router, private us: UserService) {
     this.form = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(4)]]
     });
@@ -25,17 +31,11 @@ export class RegisterUserComponent implements OnInit {
     }
   }
 
-  form: FormGroup;
-  failedRegistration;
-  userType;
-  loggedInUserType;
-
   ngOnInit(): void {
   }
 
   submitRegisterForm(): void {
     if (this.form.valid) {
-      // console.log(this.form.getRawValue());
       const registerFormVal = this.form.getRawValue();
       registerFormVal.type = this.userType;
       this.us.postUser(registerFormVal).then(user => {
@@ -46,20 +46,7 @@ export class RegisterUserComponent implements OnInit {
           this.router.navigate(['/login', {trigger: 'REGISTER'}]);
         }
       });
-
-      // this.auth.login(this.form.getRawValue()).then(status => {
-      //   if (!status) {
-      //     console.log(status);
-      //     // console.log('Failed login.');
-      //     this.failedRegistration = true;
-      //   } else {
-      //     // console.log('Successful login.');
-      //     this.us.getUserById(this.auth.user._id).then(() => this.router.navigate(['/login', {trigger: 'REGISTER'}]));
-      //
-      //   }
-      // });
     }
-
   }
 
   routeToLogin(): void {

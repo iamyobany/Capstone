@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UsersService} from '../services/users.service';
+import {UserService} from '../services/user/users.service';
 
 @Component({
   selector: 'app-user',
@@ -11,17 +11,17 @@ export class UserComponent implements OnInit {
   @Input() userId = '';
   @Input() userEmail = '';
   @Input() userType = '';
-
   @Input() loggedInUserType = '';
 
-  constructor(private us: UsersService) {
+  constructor(private us: UserService) {
+
   }
 
   ngOnInit(): void {
+
   }
 
   editUser(): boolean | void {
-    // TODO
     this.unimplemented(false);
   }
 
@@ -36,5 +36,4 @@ export class UserComponent implements OnInit {
       throw new Error('unimplemented');
     }
   }
-
 }

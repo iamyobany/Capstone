@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
-import {UsersService} from '../services/users.service';
-import {ProductsService} from '../services/products.service';
+import {UserService} from '../services/user/users.service';
+import {ProductService} from '../services/product/product.service';
 
 @Component({
   selector: 'app-admin-portal',
@@ -16,7 +16,7 @@ export class AdminPortalComponent implements OnInit {
   productList = [];
   userList = [];
 
-  constructor(private auth: AuthService, private router: Router, private us: UsersService, private ps: ProductsService) {
+  constructor(private auth: AuthService, private router: Router, private us: UserService, private ps: ProductService) {
     this.us.users.subscribe(users => this.userList = users);
     this.ps.products.subscribe(products => this.productList = products);
   }

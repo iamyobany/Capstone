@@ -30,7 +30,7 @@ router.get('/users/:"id', async(req, res) => {
 router.put('/users/:id', async(req, res) => {
     const users = {}
     const id = req.params.id
-    var fields = User.keys(this);
+    var fields = Object.keys(User.schema.paths);
 
     for (const field of fields) {
         if (req.body[field]){

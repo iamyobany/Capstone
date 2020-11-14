@@ -1,5 +1,11 @@
 <div>
-  <app-product *ngFor="let product of products" [productId]="product._id" [productName]="product.name"
-               [productBrand]="product.brand" [displayType]="displayType" [userType]="userType"
-               [cartCount]="product['count']" [parent]="parent"></app-product>
+  <app-product *ngFor="let product of products" 
+  [productId]="product._id" 
+  [productName]="product.name"
+  [productBrand]="product.brand" 
+  [displayType]="displayType" 
+  [userType]="userType"
+  [cartCount]="product['count']" 
+  [parent]="parent">
+  </app-product>
 </div>

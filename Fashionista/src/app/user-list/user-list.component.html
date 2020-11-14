@@ -1,3 +1,8 @@
 <div>
-  <app-user *ngFor="let user of users" [userId]="user._id" [userEmail]="user.email" [userType]="user.type" [loggedInUserType]="loggedInUserType"></app-user>
+  <app-user *ngFor="let user of users" 
+    [userId]="user._id" 
+    [userEmail]="user.email" 
+    [userType]="user.type" 
+    [loggedInUserType]="loggedInUserType">
+  </app-user>
 </div>

@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {ProductsService} from '../services/products.service';
+import {ProductService} from '../services/product/product.service';
 import {AuthService} from '../services/auth.service';
 
 @Component({
@@ -14,15 +14,12 @@ export class ProductListComponent implements OnInit {
   @Input() userType = '';
   @Input() parent = '';
 
-  constructor(private ps: ProductsService, private auth: AuthService) { }
+  constructor(private ps: ProductService, private auth: AuthService) { }
 
   ngOnInit(): void {
     if (this.displayType === 'all' && !this.products.length) {
       this.getProducts();
     }
-    // if (!this.userType) {
-    //   this.userType = this.auth.user.type || '';
-    // }
   }
 
   getProducts(): void {

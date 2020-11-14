@@ -7,7 +7,6 @@ router.post('/login', async (req, res) => {
     if(!user){
         res.status(401).json({error: 'Database Error: No User Found'})
     }
-
     res.status(200).json(user)
 })
 

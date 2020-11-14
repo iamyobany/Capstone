@@ -4,8 +4,7 @@
       <div class="col"><h4 class="userEmail" [textContent]="userEmail"></h4></div>
       <div *ngIf="loggedInUserType === 'admin'" class="col">
         <div class="float-right btn-group dropright">
-          <button class="btn btn-info dropdown-toggle" type="button" id="productOptions" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-info dropdown-toggle" type="button" id="productOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Options
           </button>
           <div>
@@ -16,9 +15,7 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
-  <div class="card-body"><h5 class="userType" [textContent]="userType + ' account'"
-                             style="font-style: italic"></h5></div>
+  <div class="card-body"><h5 class="userType" [textContent]="userType + ' account'" style="font-style: italic"></h5></div>
 </div>

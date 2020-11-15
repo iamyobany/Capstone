@@ -1,4 +1,6 @@
-# Capstone
+# Capstone - Fashonista Project
+
+This project was apart of the ending of my ILP training with TCS
 
 In order to use this application, you will have to create your own ```.env``` file
 in the format

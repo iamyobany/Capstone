@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../services/user/user.service';
 
@@ -13,7 +14,7 @@ export class UserComponent implements OnInit {
   @Input() userType = '';
   @Input() loggedInUserType = '';
 
-  constructor(private us: UserService) {
+  constructor(private us: UserService, private router: Router) {
 
   }
 
@@ -22,7 +23,7 @@ export class UserComponent implements OnInit {
   }
 
   editUser(): boolean | void {
-    this.unimplemented(false);
+    this.router.navigate([`/updateUser/${this.userId}`])
   }
 
   deleteUser(): boolean | void {

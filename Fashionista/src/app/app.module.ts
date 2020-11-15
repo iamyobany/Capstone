@@ -16,6 +16,7 @@ import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ProductUpdateComponent } from './product-update/product-update.componen
     RegisterComponent,
     ProductCreateComponent,
     ProductUpdateComponent,
+    UserUpdateComponent,
   ],
   imports: [
     BrowserModule,

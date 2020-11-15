@@ -1,0 +1,20 @@
+<div class = "text-center body-div" style="">
+    <form [formGroup]="form" class="form-signin" (ngSubmit)="submitUpdateForm()">
+      <h3 class="mb-3 font-weight-normal">Update User Account</h3>
+      <label for="inputfirstName" class="sr-only">First Name</label>
+      <input type="text" class="form-control" id="inputfirstName" [formControlName]="'firstName'" placeholder="First Name" autofocus autocomplete="off"/>
+  
+      <label for="inputlastName" class="sr-only">Last Name</label>
+      <input type="text" class="form-control" id="inputlastName" [formControlName]="'lastName'" placeholder="Last Name" autofocus autocomplete="off"/>
+  
+      <label for="inputUsername" class="sr-only">email</label>
+      <input type="text" class="form-control" id="inputUsername" [formControlName]="'email'" placeholder="Email" autofocus autocomplete="off"/>
+  
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" class="form-control" id="inputPassword" [formControlName]="'password'" placeholder="Password" autocomplete="off"/>
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="form.invalid">Update</button>
+      <br>
+    </form>
+  
+  </div>

@@ -12,7 +12,6 @@ import { AuthService } from '../services/auth.service';
 export class UserUpdateComponent implements OnInit {
   sub
   userid
-  userType
 
   title = 'product-update'
   form: FormGroup
@@ -28,16 +27,11 @@ export class UserUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
       this.userid = params['id'];
-      this.us.getUserById(this.userid).then(user => {
-        this.userType = user.type
-      })
     })
-    console.log(this.userid)
   }
 
   submitUpdateForm(): void {
     if (this.form.valid){
-      console.log(this.userType)
       this.us.putUser(this.userid, this.form.getRawValue()).then(user => {
         if (!user) {
           console.log(user)
